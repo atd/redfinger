@@ -50,7 +50,8 @@ module Redfinger
 
       doc.at('Link[rel=lrdd]').attribute('template').value
     rescue  Errno::ECONNREFUSED, Errno::ETIMEDOUT,
-            RestClient::RequestTimeout, RestClient::ResourceNotFound, RestClient::Forbidden
+            RestClient::RequestTimeout, RestClient::ResourceNotFound, RestClient::Forbidden,
+            OpenSSL::SSL::SSLError
       if ssl
         retrieve_template_from_xrd(false)
       else
